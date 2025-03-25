@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - CraftingProject</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/CraftingProject.styles.css" asp-append-version="true" />
+
+    <meta charset="utf-8" />
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 50px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        select, table {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .stock {
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+            margin-top: -10px;
+        }
+    </style>
+
+    <script>
+        function showData() {
+            const craft = document.getElementById('craftDropdown').value;
+            const allTables = document.querySelectorAll('.dataTable');
+            const stockDiv = document.getElementById('stock');
+
+            allTables.forEach(table => table.style.display = 'none');
+            stockDiv.style.display = 'none';
+
+            if (craft) {
+                document.getElementById(craft).style.display = 'table';
+                if (craft === 'paperCraft') {
+                    stockDiv.style.display = 'block';
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+
+
+        <header>
+            <nav style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background-color: #f8f9fa; border-bottom: 2px solid #ddd;">
+                <h2 style="margin: 0;">Admin Dashboard</h2>
+
+                @if (Context.Session.GetString("Username") != null)
+                {
+                    <a href="/Login/Logout" class="btn btn-danger">Logout</a>
+                }
+            </nav>
+        </header>
+
+        <br />
+        <label for="craftDropdown">Select Craft Category:</label>
+        <select id="craftDropdown" onchange="showData()">
+            <option value="">-- Select --</option>
+            <option value="paperCraft">Paper Craft</option>
+            <option value="bottleCraft">Bottle Craft</option>
+            <option value="fibreCraft">Fibre Craft</option>
+            <option value="clay">Clay</option>
+            <option value="basketWeaving">Basket Weaving</option>
+            <option value="teddyBearMaking">Teddy Bear Making</option>
+        </select>
+
+        <!-- Available Stock (Visible Only for Paper Craft) -->
+        <div id="stock" class="stock" style="display:none;">Available Stock: 10</div>
+
+        <!-- Paper Craft Table -->
+        <table id="paperCraft" class="dataTable" style="display:none;">
+            <tr><th>Name</th><th>Mobile Number</th><th>Address</th><th>Payment Mode</th><th>Status</th></tr>
+            <tr><td>Balaji</td><td>9876543210</td><td>Chennai</td><td>Cash</td><td>Paid</td></tr>
+            <tr><td>Krishnan</td><td>9876543211</td><td>Madurai</td><td>Online</td><td>Not Paid</td></tr>
+            <tr><td>Keerthiga</td><td>9876543212</td><td>Coimbatore</td><td>Cash</td><td>Paid</td></tr>
+        </table>
+
+        <!-- Bottle Craft Table -->
+
+        <div id="stock" class="stock" style="display:none;">Available Stock: 23</div>
+
+        <table id="bottleCraft" class="dataTable" style="display:none;">
+            <tr><th>Name</th><th>Mobile Number</th><th>Address</th><th>Payment Mode</th><th>Status</th></tr>
+            <tr><td>Dheeran</td><td>9876543213</td><td>Salem</td><td>Online</td><td>Paid</td></tr>
+            <tr><td>Siva Kumar</td><td>9876543214</td><td>Erode</td><td>Cash</td><td>Not Paid</td></tr>
+        </table>
+
+        <!-- Fibre Craft Table -->
+        <div id="stock" class="stock" style="display:none;">Available Stock: 7</div>
+
+        <table id="fibreCraft" class="dataTable" style="display:none;">
+            <tr><th>Name</th><th>Mobile Number</th><th>Address</th><th>Payment Mode</th><th>Status</th></tr>
+            <tr><td>Kannan</td><td>9876543215</td><td>Trichy</td><td>Cash</td><td>Paid</td></tr>
+            <tr><td>Muthu Kumaran</td><td>9876543216</td><td>Theni</td><td>Online</td><td>Not Paid</td></tr>
+        </table>
+
+        <!-- Clay Table -->
+        <div id="stock" class="stock" style="display:none;">Available Stock: 13</div>
+
+        <table id="clay" class="dataTable" style="display:none;">
+            <tr><th>Name</th><th>Mobile Number</th><th>Address</th><th>Payment Mode</th><th>Status</th></tr>
+            <tr><td>Priya</td><td>9876543217</td><td>Madurai</td><td>Cash</td><td>Paid</td></tr>
+            <tr><td>Naveen</td><td>9876543218</td><td>Dindigul</td><td>Online</td><td>Paid</td></tr>
+        </table>
+
+        <!-- Basket Weaving Table -->
+
+        <div id="stock" class="stock" style="display:none;">Available Stock: 8</div>
+        <table id="basketWeaving" class="dataTable" style="display:none;">
+            <tr><th>Name</th><th>Mobile Number</th><th>Address</th><th>Payment Mode</th><th>Status</th></tr>
+            <tr><td>Karthikeyan</td><td>9876543219</td><td>Thanjavur</td><td>Cash</td><td>Not Paid</td></tr>
+            <tr><td>Harshan</td><td>9876543220</td><td>Namakkal</td><td>Online</td><td>Paid</td></tr>
+        </table>
+
+        <!-- Teddy Bear Making Table -->
+        <div id="stock" class="stock" style="display:none;">Available Stock: 17</div>
+        <table id="teddyBearMaking" class="dataTable" style="display:none;">
+            <tr><th>Name</th><th>Mobile Number</th><th>Address</th><th>Payment Mode</th><th>Status</th></tr>
+            <tr><td>Yukashini</td><td>9876543221</td><td>Karur</td><td>Cash</td><td>Paid</td></tr>
+            <tr><td>Bincy</td><td>9876543222</td><td>Cuddalore</td><td>Online</td><td>Not Paid</td></tr>
+        </table>
+    </div>
+</body>
+</html>
